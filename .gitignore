@@ -3,3 +3,18 @@
 .vscode/c_cpp_properties.json
 .vscode/launch.json
 .vscode/ipch
+
+# Secrets and sensitive information
+include/secrets.h
+
+# Backup files
+backup/
+*.bak
+*.orig
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log

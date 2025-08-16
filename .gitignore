@@ -18,3 +18,6 @@ Thumbs.db
 
 # Log files
 *.log
+
+# Don't upload reverse engineering folder (sensitive packet captures)
+reverse_engineering/

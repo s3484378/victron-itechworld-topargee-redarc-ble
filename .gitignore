@@ -7,6 +7,16 @@
 # Secrets and sensitive information
 include/secrets.h
 
+# Python
+.venv/
+itech-240x/secrets.py
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+env/
+
 # Backup files
 backup/
 *.bak

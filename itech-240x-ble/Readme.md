@@ -1,4 +1,27 @@
+To enable or disable the charge/discharge isolator relays:
+ - Write the appropriate command to the Write characteristic (`0000ff02-0000-1000-8000-00805f9b34fb`).
+   - Enable charge isolator: send `dd5ae1020001ff1c77`
+   - Enable discharge isolator: send `dd5ae1020002ff1b77`
+   - Disable both: send `dd5ae1020000ff1d77`
+   - Enable both: send `dd5ae1020003ff1a77`
+ - The script will send the correct hex payload for each command and show the result in the live panel.
 # Itechworld BLE Reverse Engineering Guide
+# Quick Summary
+
+To extract data from the Itechworld 240x battery via BLE:
+
+1. Connect to the device using its BLE address.
+2. Discover services and characteristics.
+3. Subscribe to notifications on the Notify characteristic (`0000ff01-0000-1000-8000-00805f9b34fb`).
+4. Send a write command to the Write characteristic (`0000ff02-0000-1000-8000-00805f9b34fb`):
+  - Write `dda50300fffd77` to receive 3 data notifications (main blocks).
+  - Write `dda50400fffc77` to receive 1 data notification (cell voltages).
+5. See below for decoding information on each notification block.
+
+To enable or disable the charge/discharge isolator relays:
+ - Write the appropriate command (`c`, `d`, `o`, or `b` as described below) to the same Write characteristic (`0000ff02-0000-1000-8000-00805f9b34fb`).
+ - The script will send the correct hex payload for each command and show the result in the live panel.
+
 
 ## Overview
 This document details the current understanding of the BLE protocol for the Itechworld 240x battery, including how to connect, subscribe, send commands, and decode the notification data blocks. It is based on reverse engineering efforts using Python, Bleak, and live packet analysis. Other batteries may use the same protocol, but I haven't tested.

@@ -10,6 +10,7 @@ include/secrets.h
 # Python
 .venv/
 itech-240x/secrets.py
+victron-ble/secrets.py
 __pycache__/
 *.pyc
 *.pyo

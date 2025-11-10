@@ -3,51 +3,28 @@
 Attempt at an ESP32 based BLE device to consolidate the readings from an Itechworld 240X battery, Redarc Alpha 50 DC-DC charger, Victron Smart Shunt and Topargee BLE water gauge
 
 ## Hardware - in progress
-Developing using a TTGO 18560 board with OLED display - aim will be to have this on a custom touch panel to allow control (isolate battery, reset water gauge etc)
+Developing using a TTGO 18560 board with OLED display and an android app built using Flutter framework - aim will be to have this on a custom touch panel to allow control (isolate battery, reset water gauge etc)
 
-## Setup Instructions
 
-### 1. Clone the Repository
-```bash
-git clone https://github.com/your-username/victron-itechworld-topargee-redarc-ble.git
-cd victron-itechworld-topargee-redarc-ble
-```
+## Project Checklist
+- [x] Itechworld 240X Pro
+- [x] Victron 300A smart shunt
+- [x] Victron 20A Smart Solar
+- [x] Topargee BLE Tank sensor
+- [ ] Redarc Alpha 50
+- [x] Android app to view all data in single screen
+- [ ] ESP32 data concentrator
+- [ ] Raspberry Pi data concentrator/datalogger
 
-### 2. Configure Secrets
-Before building the project, you need to create a secrets file with your device-specific information:
+## Current Project Structure
+Currently the devices are still being reverse engineered. For a speedy process, python is being used for the reverse engineering and data decoding. There is a folder for each device where the final (if completed) python script is located to extract data from these devices. If you want to replicate, you'll most likely need to create a secrets.py file that will include the device MAC address you're trying to connect to and any other secrets you may need (like a bind key for your Victron devices).
 
-1. Copy the template file:
-   ```bash
-   cp include/secrets_template.h include/secrets.h
-   ```
-
-2. Edit `include/secrets.h` and replace the placeholder values with your actual device information:
-   - `BATTERY_MAC_ADDRESS`: The MAC address of your target BLE device
-   - `DEVICE_NAME`: The name your ESP32 should advertise as
-
-### 3. Build and Upload
-Use PlatformIO to build and upload the firmware to your ESP32:
-```bash
-platformio run --target upload
-```
-
-### 4. Monitor Serial Output
-```bash
-platformio device monitor
-```
-
-## Project Structure
-- `src/main.cpp` - Main BLE proxy application
-- `include/secrets.h` - Device-specific configuration (not tracked by git)
-- `include/secrets_template.h` - Template for secrets configuration
-- `raw_data/` - Sample BLE communication data
-- `backup/` - Backup files (not tracked by git)
+## Ultimate Goal
+Raspberry Pi will connect to and poll all BLE devices data. Pi will also act as a BLE server that my phone can connect to when in range to view the latest data for each connected device. Control commands can also be sent (to reset the water tank for example).
 
 ## Features
-- **BLE Transparent Proxy**: Acts as a man-in-the-middle between your phone and BLE device
-- **Complete Service Cloning**: Automatically discovers and replicates all BLE services
-- **Real-time Monitoring**: Logs all BLE communication for analysis
-- **Command Discovery**: Captures the exact commands sent by mobile apps
-
-## Security Note
-The `secrets.h` file contains sensitive information like MAC addresses and is excluded from version control. Always use the template file to create your own secrets configuration.
+- [ ] Homeassistant integration when Raspberry Pi is in WiFi range or connected to VPN
+- [ ] Standalone screen for quick glance of data (ESP32 OLED, etc)
+- [ ] Phone app to connect locally via BLE to Raspberry Pi, or via API/MQTT if remote
+- [ ] Ability to store and forward historic data (e.g. go on 2 week trip, Pi stores data locally, on return home and connect to home WiFi, backfill Homeassistant database)
+- [ ] Possibly add GPS data logger in Pi to automate drawing trips onto a map

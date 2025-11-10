@@ -1,0 +1,18 @@
+// Example secrets file for Tallulah BLE Vehicle Monitor
+// Copy this file to secrets.dart and update the values to match your devices
+
+// MAC addresses
+const String SHUNT_MAC = "XX:XX:XX:XX:XX:XX";
+const String SOLAR_MAC = "XX:XX:XX:XX:XX:XX";
+const String ITECHWORLD_MAC = "XX:XX:XX:XX:XX:XX";
+const String TOPARGEE_MAC = "XX:XX:XX:XX:XX:XX";
+
+// Bind keys
+const List<int> SHUNT_BINDKEY = [
+  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+];
+const List<int> SOLAR_BINDKEY = [
+  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+];
